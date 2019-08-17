@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}
+    <title>index</title>
+{% endblock %}
+{% block con %}
+    <h1> index2 </h1>
+    <p> {{ name }}</p>
+    <p> {{ i }}</p>
+    <p> {{ info }}</p>
+    <p> {{ l }}</p>
+    <p> {{ alex }}</p>
+    <p> {{ b }}</p>
+    <p> {{ person_list }}</p>
+    <hr>
+
+    <h3>深度查询</h3>
+
+    <p> {{ l.1 }}</p>
+    <p> {{ info.name }}</p>
+    <p> {{ alex.name }}</p>
+    <p> {{ alex.age }}</p>
+
+    <p> {{ person_list.1.age }} </p>
+
+    <h3>过滤器</h3>
+    <p>{{ now|date:"Y-m-d" }}</p>
+    <p> person_list：{{ person_list|default:"数据为空" }}</p>
+    <p> {{ file_size|filesizeformat }} </p>
+    <p> {{ str_name|slice:"4:8" }} </p>
+    <p> {{ text|truncatechars:20 }} </p>
+    <p> {{ english_text|truncatewords:10 }} </p>
+    <p> {{ link|safe }} </p>
+    <p> {{ l.0|add:100 }}</p>
+    <p> {{ info.name|upper }} </p>
+    <hr>
+
+    <h4>for标签</h4>
+    {% for i in l %}
+        <p> {{ i }} </p>
+    {% endfor %}
+    <hr>
+    {% for k in info %}
+        <p> {{ k }} </p>
+    {% endfor %}
+    <hr>
+    {% for person in person_list %}
+        <p> {{ forloop.counter }}:{{ person.name }} ,{{ person.age }}</p>
+    {% endfor %}
+
+    <hr>
+    {% for person in person_list1 %}
+        <p> {{ forloop.counter }}:{{ person.name }} ,{{ person.age }}</p>
+    {% empty %}
+        <p> 列表为空 </p>
+    {% endfor %}
+    <hr>
+    <h3>if标签</h3>
+    {% if user %}
+        <p>
+            <a href="">hi {{ user }}</a>
+            <a href="">注销</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="">登录</a>
+            <a href="">注册</a>
+        </p>
+    {% endif %}
+
+    <hr>
+    {% with person_list.1.name as n %}
+        <p>{{ n }}</p>
+        <p>{{ n }}</p>
+    {% endwith %}
+
+    <hr>
+    <h2>自定义过滤器</h2>
+    {% load my_tag_fliter %}
+    <p> {{ i|multi_filter:20 }} </p>
+
+    <h2>自定义标签</h2>
+    <p> {% multi_tag i 9 %} </p>
+
+    <hr>
+    {% if i|multi_filter:10 > 100 %}
+        <p>100</p>
+    {% else %}
+        <p> {{ i }} </p>
+    {% endif %}
+{% endblock %}
