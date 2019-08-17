@@ -163,6 +163,27 @@ def query(request):
     # print(ret)
 
     # 练习
+    # 统计每一本以py开头的数据作者个数
+    # ret = Book.objects.filter(title__startswith="py").values("pk").annotate(c=Count("authors__name")).values("title", "c")
+    # print(ret)
+
+    # 统计不止一个作者的书籍
+    # ret = Book.objects.values("pk").annotate(c=Count("authors__name")).filter(c__gt=1).values("title", "c")
+    # print(ret)
+
+    # ######################### F查询 与 Q查询 ########################################
+    from django.db.models import F, Q
+    # r = Book.objects.filter(comment_num__gt=F("read_num"))
+    # print(r)
+
+    # Book.objects.all().update(price=F("price")+1)  更新价格+1
+
+    # ret = Book.objects.filter(Q(title="水浒传") | Q(price=50)) # 或的关系
+    # print(ret)
+
+    # 非
+    ret = Book.objects.filter(~Q(title="水浒传") & ~Q(price=50), publish__exact=1)     # Q要放在签名
+    print(ret)
 
 
     return HttpResponse("OK\t\r<h1>hello world</h1>")
