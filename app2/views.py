@@ -93,10 +93,10 @@ def query(request):
     # 一对一查询的正向查询：查询 小呆 手机号
     # 方式1：
     # 需求 通过book表join与其关联的authorDetail表，属于正向查询，按字段authorDetail 通知ORM引擎join authorDetail表
-    ret = Author.objects.filter(name="小呆").values('authorDetail__telephone')
+    # ret = Author.objects.filter(name="小呆").values('authorDetail__telephone')
 
     # 方式2：通过authorDetail表join与其关联的Author表，属于反向查询，按表名小写通知ORM引擎join Author表
-    AuthorDetail.objects.filter(author__name="小呆").values('telephone')
+    # AuthorDetail.objects.filter(author__name="小呆").values('telephone')
 
     # 进阶联系
     # 练习 手机号以170开头 的作者出版过的所有书籍名称 以及 书籍出版社的名称
@@ -111,15 +111,59 @@ def query(request):
     # print(ret1)
 
     # ------------------- 集合与分组查询----------------------
-    # ---------------------------聚合  aggregate:返回值是一个字典，不再是 queryset
+    # --------------------------->聚合  aggregate:返回值是一个字典，不再是 queryset
     # 查询所有书籍的平均价格
     from django.db.models import Avg, Max, Min, Count
 
     # ret = Book.objects.all().aggregate(avg_price=Avg("price"))
     # print(ret) # {'avg_price': Decimal('39.966667')}
 
-    ret = Book.objects.all().aggregate(avg_price=Avg("price"), max_price=Max("price"))
-    print(ret) # {'avg_price': Decimal('39.966667'), 'max_price': Decimal('50.60')}
+    # ret = Book.objects.all().aggregate(avg_price=Avg("price"), max_price=Max("price"))
+    # print(ret) # {'avg_price': Decimal('39.966667'), 'max_price': Decimal('50.60')}
+
+    # --------------------------->分组查询 annotate 返回值:queryset
+    # 单表分组查询：
+
+    # 示例1
+    # 查询每一个部门的名称以及员工的平均薪水
+    # select dep, Avg(salary) from emp group by dep
+    # ret = Emp.objects.values("dep").annotate(avg_salary=Avg("salary"))
+    # print(ret)
+
+    # 单表分组查询ORM语法： 单表模型.objects.values("group by 字段").annotate(聚合函数('统计字段'))
+
+    # 示例2
+    # 查询每一个身份的名称 以及 对应的员工数
+    # ret1 = Emp.objects.values("province").annotate(Count('id'))
+    # print(ret1) # <QuerySet [{'province': '北京市', 'id__count': 1}, {'province': '山东省', 'id__count': 2}, {'province': '河北省', 'id__count': 1}]>
+
+
+    # 补充知识
+    # Emp.objects.all()  # select * from emp
+    # Emp.objects.all().values('name')  # select name from emp
+
+    # ---------------------------> 多表分组查询
+    # 示例1  查询每一个出版社的名称 以及 书籍的个数
+    # ret = Publish.objects.values('nid').annotate(c=Count("book__title")).values("name", "c")
+    # ret1 = Book.objects.all().values('publish__name').annotate(Count('title'))
+    # print(ret)
+    # print(ret1)
+
+    # 示例2  查询每一个作者的名字 以及 出版社的书籍的最高价格
+    # ret = Author.objects.values('pk').annotate(max_price = Max("book__price")).values("name", "max_price")
+    # print(ret)
+
+    # 总结 跨表的分组查询的模型：
+    # 每一个的表模型.objects.values("pk").annotate(聚合函数(关联表__统计字段))
+
+    # 示例3  查询每一个书籍的名称 以及 对应的作者个数
+    # ret = Book.objects.values("pk").annotate(c= Count("authors__name")).values("title", "c")
+    # ret = Book.objects.annotate(c= Count("authors__name")).values("title", "c")
+
+    # print(ret)
+
+    # 练习
+
 
     return HttpResponse("OK\t\r<h1>hello world</h1>")
 '''
