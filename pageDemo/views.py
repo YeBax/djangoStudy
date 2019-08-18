@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from app2.models import *
 # Create your views here.
 
@@ -25,16 +25,19 @@ def index(request):
     print("num_pages", paginator.num_pages)     # 总页数
     print("page_range", paginator.page_range)   # 页码列表
 
-    page = int(request.GET.get("page"))
-    current_page = paginator.page(page)
+    try:
+        page = int(request.GET.get("page"))
+        current_page = paginator.page(page)
 
-    page1 = paginator.page(1)
+        page1 = paginator.page(1)
 
-    # 显示某一页具体数据的两种方式
-    print("object_list", page1.object_list)
+        # 显示某一页具体数据的两种方式
+        print("object_list", page1.object_list)
 
-    for i in page1:
-        print(i)
+        for i in page1:
+            print(i)
+    except EmptyPage as e:
+        current_page = paginator.page(1)
 
     return render(request, "pagedemo/index.html", locals())
 
