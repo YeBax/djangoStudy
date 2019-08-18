@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pagedemo</title>
+</head>
+<body>
+    {% for book in current_page %}
+        <li>{{ book.title }}:{{ book.price }}, {{ book.publish.name }}</li>
+{% endfor %}
+</body>
+</html>
