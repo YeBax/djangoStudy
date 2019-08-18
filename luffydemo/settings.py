@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'app1.apps.UsersConfig',
     "app2",
     "ajaxdemo",
+    "pageDemo",
 ]
 
 MIDDLEWARE = [
