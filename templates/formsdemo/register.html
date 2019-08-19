@@ -3,79 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="stylesheet" href="/statics/bootstrap-3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+    <div class="col-md-6 col-lg-offset-3">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="user">用户名</label>
+                <p><input type="text" name="name" id="name"></p>
+            </div>
+            <div>
+                <label for="pwd">密码</label>
+                <p><input type="password" name="pwd" id="pwd"></p>
+            </div>
+            <div>
+                <label for="r_pwd">确认密码</label>
+                <p><input type="password" name="r_pwd" id="r_pwd"></p>
+            </div>
+            <div>
+                <label for="email">邮箱</label>
+                <p><input type="text" name="email" id="email"></p>
+            </div>
+            <div>
+                <label for="tel">手机号</label>
+                <p><input type="text" name="tel" id="tel"></p>
+            </div>
+            <input type="submit">
+        </form>
+        <hr>
+        <h3> form是组件 渲染方式1</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <label>{{ form.name.label }}</label>
+                <p>{{ form.name }} <span>{{ form.name.errors.0 }}</span></p>
+            </div>
+            <div>
+                <label>密码</label>
+                <p>{{ form.pwd }}<span>{{ form.pwd.errors.0 }}</span></p>
+            </div>
+            <div>
+                <label>确认密码</label>
+                <p>{{ form.r_pwd }}<span>{{ form.r_pwd.errors.0 }}</span></p>
+            </div>
+            <div>
+                <label>邮箱</label>
+                <p>{{ form.email }}<span>{{ form.email.errors.0 }}</span></p>
+            </div>
+            <div>
+                <label for="tel">手机号</label>
+                <p>{{ form.tel }}<span>{{ form.tel.errors.0 }}</span></p>
+            </div>
+            <input type="submit">
+        </form>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <div>
-        <label for="user">用户名</label>
-        <p><input type="text" name="name" id="name"></p>
+        <h3> form是组件 渲染方式2</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="">{{ field.label }}</label>
+                    <p>{{ field }}</p>
+                </div>
+            {% endfor %}
+            <input type="submit">
+        </form>
+        <hr>
+        <h3> form是组件 渲染方式3</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_ul }} {# 不建议使用，样式太固定了，不灵活 #}
+            <input type="submit">
+        </form>
     </div>
-    <div>
-        <label for="pwd">密码</label>
-        <p><input type="password" name="pwd" id="pwd"></p>
-    </div>
-    <div>
-        <label for="r_pwd">确认密码</label>
-        <p><input type="password" name="r_pwd" id="r_pwd"></p>
-    </div>
-    <div>
-        <label for="email">邮箱</label>
-        <p><input type="text" name="email" id="email"></p>
-    </div>
-    <div>
-        <label for="tel">手机号</label>
-        <p><input type="text" name="tel" id="tel"></p>
-    </div>
-    <input type="submit">
-</form>
-
-<hr>
-<h3> form是组件 渲染方式1</h3>
-<form action="" method="post">
-    {% csrf_token %}
-    <div>
-        <label>{{ form1.name.label }}</label>
-        <p>{{ form1.name }}</p>
-    </div>
-    <div>
-        <label>密码</label>
-        <p>{{ form1.pwd }}</p>
-    </div>
-    <div>
-        <label>确认密码</label>
-        <p>{{ form1.r_pwd }}</p>
-    </div>
-    <div>
-        <label>邮箱</label>
-        <p>{{ form1.email }}</p>
-    </div>
-    <div>
-        <label for="tel">手机号</label>
-        <p>{{ form1.tel }}</p>
-    </div>
-    <input type="submit">
-</form>
-
-<h3> form是组件 渲染方式2</h3>
-<form action="" method="post">
-    {% csrf_token %}
-    {% for field in form1 %}
-        <div>
-            <label for="">{{ field.label }}</label>
-            <p>{{ field }}</p>
-        </div>
-    {% endfor %}
-    <input type="submit">
-</form>
-<hr>
-<h3> form是组件 渲染方式3</h3>
-<form action="" method="post">
-    {% csrf_token %}
-   {{ form1.as_ul }} {# 不建议使用，样式太固定了，不灵活 #}
-    <input type="submit">
-</form>
+</div>
 </body>
 </html>
