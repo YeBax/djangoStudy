@@ -58,7 +58,7 @@
     //登录验证
     $(".login_btn").click(function () {
         $.ajax({
-            url:"{% url "ajaxdemo:alogin" %}",
+            url:"/ajaxdemo/login/",
             type:"post",
             data:{
                 "user":$("#user").val(),

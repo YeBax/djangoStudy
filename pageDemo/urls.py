@@ -15,6 +15,6 @@ from pageDemo import views
 
 urlpatterns = [
     path("index/", views.index),
-
+    path("bulk_books/", views.bulk_books),
 
 ]

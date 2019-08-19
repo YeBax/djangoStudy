@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "app2",
     "ajaxdemo",
     "pageDemo",
+    "formsdemo",
+
 ]
 
 MIDDLEWARE = [

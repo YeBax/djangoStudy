@@ -36,7 +36,9 @@ urlpatterns = [
     re_path(r"app1/", include(("app1.urls", "app1"))),
     re_path(r"app2/", include(("app2.urls", "app2"))),
     re_path(r"ajaxdemo/", include(("ajaxdemo.urls", "ajaxdemo"))),
-    path("pagedemo/", include("pageDemo.urls"))
+    path("pagedemo/", include("pageDemo.urls")),
+    path("formsdemo/", include("formsdemo.urls")),
+
 
 
 

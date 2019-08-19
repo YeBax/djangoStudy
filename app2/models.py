@@ -34,7 +34,7 @@ class Book(models.Model):
     nid = models.AutoField(primary_key=True)
     title = models.CharField(max_length=32)
     publishDate=models.DateField()
-    price=models.DecimalField(max_digits=5,decimal_places=2)
+    price=models.DecimalField(max_digits=10, decimal_places=2)
 
     read_num = models.IntegerField(default=0)
     comment_num = models.IntegerField(default=0)
