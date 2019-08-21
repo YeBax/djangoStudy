@@ -19,6 +19,6 @@ urlpatterns = [
     # re_path(r'^articles/([0-9]{4})/([0-9]{2})/$', views.month_archive),
     re_path(r'^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.month_archive),
     # re_path(r'^articles/([0-9]{4})/([0-9]{2})/([0-9]+)/$', views.article_detail)
-    re_path("index/", views.index, name="index"),
+    re_path("index/$", views.index, name="index"),
     path("index2/", views.index2, name="index2"),
 ]

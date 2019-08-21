@@ -1,8 +1,6 @@
 from django.shortcuts import render, HttpResponse
-from django import forms
 from formsdemo.myforms import *
-from django.forms import widgets
-from .models import *
+
 from django.core.exceptions import NON_FIELD_ERRORS, ValidationError
 # Create your views here.
 

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "ajaxdemo",
     "pageDemo",
     "formsdemo",
+    "cookieSession",
+
 
 ]
 
