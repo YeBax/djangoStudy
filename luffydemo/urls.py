@@ -39,6 +39,8 @@ urlpatterns = [
     # path("pagedemo/", include("pageDemo.urls")),
     # path("formsdemo/", include("formsdemo.urls")),
     path("cookiesession/", include("cookieSession.urls")),
+    path("authdemo/", include("authdemo.urls")),
+
 
 
 

@@ -18,4 +18,5 @@ urlpatterns = [
     path("orders/", views.orders),
     path("query/", views.query),
 
+
 ]

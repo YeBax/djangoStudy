@@ -7,8 +7,8 @@
 <body>
 
 
-<h3>Hi,{{ username }}</h3>
+<h3>Hi,{{ request.user.username }}</h3>
 <p>上次登陆时间:{{ last_visit_time }}</p>
-<a href="/cookiesession/logout/">注销</a>
+<a href="/authdemo/logout/">注销</a>
 </body>
 </html>
