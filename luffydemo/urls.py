@@ -21,7 +21,7 @@ from app1 import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'timer/', views.timer),
-    url(r'^login/$', views.login, name="Login"),
+    # url(r'^login/$', views.login, name="Login"),
 
     # 路由配置：  路径 --> 视图函数
 
@@ -33,11 +33,14 @@ urlpatterns = [
 
 
     # 分发：
-    re_path(r"app1/", include(("app1.urls", "app1"))),
-    re_path(r"app2/", include(("app2.urls", "app2"))),
-    re_path(r"ajaxdemo/", include(("ajaxdemo.urls", "ajaxdemo"))),
-    path("pagedemo/", include("pageDemo.urls")),
-    path("formsdemo/", include("formsdemo.urls")),
+    # re_path(r"^app1/", include(("app1.urls", "app1"))),
+    # re_path(r"^app2/", include(("app2.urls", "app2"))),
+    # re_path(r"^ajaxdemo/", include(("ajaxdemo.urls", "ajaxdemo"))),
+    # path("pagedemo/", include("pageDemo.urls")),
+    # path("formsdemo/", include("formsdemo.urls")),
+    path("cookiesession/", include("cookieSession.urls")),
+    path("authdemo/", include("authdemo.urls")),
+
 
 
 
