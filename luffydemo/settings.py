@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     "pageDemo",
     "formsdemo",
     "cookieSession",
+    "authdemo",
+
+
 
 ]
 
@@ -156,3 +159,5 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = "/authdemo/login/"
