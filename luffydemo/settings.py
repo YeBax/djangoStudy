@@ -49,6 +49,8 @@ INSTALLED_APPS = [
 
 ]
 
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.contrib.auth.middleware import AuthenticationMiddleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -57,6 +59,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app1.my_middlewares.CustomerMiddleware',
+    'app1.my_middlewares.CustomerMiddleware2',
+    'app1.my_middlewares.AuthMiddleware'
+
 ]
 
 ROOT_URLCONF = 'luffydemo.urls'
@@ -142,22 +148,24 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "statics")
 ]
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django.db.backends': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level':'DEBUG',
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console':{
+#             'level':'DEBUG',
+#             'class':'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'handlers': ['console'],
+#             'propagate': True,
+#             'level':'DEBUG',
+#         },
+#     }
+# }
 
 LOGIN_URL = "/authdemo/login/"
+
+WHITER_LIST = ["/authdemo/login/", "/authdemo/reg/", "/authdemo/logout/"]
